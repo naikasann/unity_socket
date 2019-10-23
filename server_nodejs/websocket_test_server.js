@@ -2,20 +2,22 @@ const WebSocket  = require('ws');
 var os = require("os");
 var interfaces = os.networkInterfaces();
 
-var address_list = [];
+function take_ipaddress(){
+   var address_list = [];
 
-// taken ip address for unity send data
-for(var k in interfaces){
-   for(var k2 in interfaces[k]){
-      var address = interfaces[k][k2];
-      if(address.family == "IPv4" && !address.internal){
-         address_list.push(address.address);
+   // taken ip address for unity send data
+   for(var k in interfaces){
+      for(var k2 in interfaces[k]){
+         var address = interfaces[k][k2];
+         if(address.family == "IPv4" && !address.internal){
+            address_list.push(address.address);
+         }
       }
    }
+   return address_list;
 }
 
-console.log(address_list);
-
+var address_list = take_ipaddress();
 // craate websocket. WebSocket.Server(<IPAdress> : <Port>)
 // ex :) WebSocket.Server("ws://127.0.0.1:5001")
 
