@@ -28,7 +28,9 @@ wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
  
    ws.on('message', (message) => {
-      console.log(`Received a message from client: ${message}`);
+      //recieve msg
+      msg = `${message}`;
+      console.log(msg);
       ws.send(address_list);
    });
  
