@@ -58,18 +58,9 @@ wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
  
    ws.on('message', (message) => {
-      //recieve msg
-      msg = `${message}`;
-      console.log(msg);
-      ws.send(address_list);
+      console.log(`Received a message from client: ${message}`);
+      ws.send("Server received message.");
    });
- 
-   setInterval(function() {
-      console.log("Sended");
-      wss.clients.forEach(client => {
-         client.send('Send to established all client.');
-      });
-   }, 1000);
 });
 
 console.log('Websocket server running. localhost:3000');
