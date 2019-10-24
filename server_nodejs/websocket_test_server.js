@@ -1,24 +1,6 @@
 const WebSocket  = require('ws');
-var os = require("os");
 const http = require('http');
 const fs = require('fs');
-
-var interfaces = os.networkInterfaces();
-
-function take_ipaddress(){
-   var address_list = [];
-
-// taken ip address for unity send data
-   for(var k in interfaces){
-      for(var k2 in interfaces[k]){
-         var address = interfaces[k][k2];
-         if(address.family == "IPv4" && !address.internal){
-            address_list.push(address.address);
-         }
-      }
-   }
-   return address_list;
-}
 
 //html reader
 const server = http.createServer((req, res)=>{
@@ -51,8 +33,6 @@ console.log("html server running. localhost:8888")
 server.listen(8888);
 //websocket server 
 const wss = new WebSocket.Server({ port: 3000 });
-var address_list = take_ipaddress();
-
 //websocketserver connection callback
 wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
@@ -62,6 +42,3 @@ wss.on('connection', (ws) => {
       ws.send("Server received message.");
    });
 });
-
-console.log('Websocket server running. localhost:3000');
-console.log('Server running');
