@@ -8,20 +8,23 @@ var interfaces = os.networkInterfaces();
 function take_ipaddress(){
    var address_list = [];
 
-   // taken ip address for unity send data
-   for(var k in interfaces){
-      for(var k2 in interfaces[k]){
-         var address = interfaces[k][k2];
-         if(address.family == "IPv4" && !address.internal){
-            address_list.push(address.address);
-         }
+// craate websocket. WebSocket.Server(<IPAdress> : <Port>)
+// ex :) WebSocket.Server("ws://127.0.0.1:5001")
+const wss = new WebSocket.Server({ port: 3000 });
+
+// taken ip address for unity send data
+for(var k in interfaces){
+   for(var k2 in interfaces[k]){
+      var address = interfaces[k][k2];
+      if(address.family == "IPv4" && !address.internal){
+         address_list.push(address.address);
       }
    }
    return address_list;
 }
 
+//html reader
 const server = http.createServer((req, res)=>{
-   //ファイル読み込み
    var url = req.url; //リクエストからURLを取得
    var tmp = url.split('.'); //splitで . で区切られた配列にする 
    var ext = tmp[tmp.length - 1]; //tmp配列の最後の要素(外部ファイルの拡張子)を取得
@@ -73,3 +76,5 @@ wss.on('connection', (ws) => {
 });
 
 console.log('Websocket server running. localhost:3000');
+server.listen(5001);
+console.log('Server running');
