@@ -8,16 +8,13 @@ var interfaces = os.networkInterfaces();
 function take_ipaddress(){
    var address_list = [];
 
-// craate websocket. WebSocket.Server(<IPAdress> : <Port>)
-// ex :) WebSocket.Server("ws://127.0.0.1:5001")
-const wss = new WebSocket.Server({ port: 3000 });
-
 // taken ip address for unity send data
-for(var k in interfaces){
-   for(var k2 in interfaces[k]){
-      var address = interfaces[k][k2];
-      if(address.family == "IPv4" && !address.internal){
-         address_list.push(address.address);
+   for(var k in interfaces){
+      for(var k2 in interfaces[k]){
+         var address = interfaces[k][k2];
+         if(address.family == "IPv4" && !address.internal){
+            address_list.push(address.address);
+         }
       }
    }
    return address_list;
@@ -76,5 +73,4 @@ wss.on('connection', (ws) => {
 });
 
 console.log('Websocket server running. localhost:3000');
-server.listen(5001);
 console.log('Server running');
