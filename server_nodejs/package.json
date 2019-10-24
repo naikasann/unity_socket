@@ -1,24 +1,15 @@
 {
-  "name": "unity_socket",
+  "name": "server_nodejs",
   "version": "1.0.0",
-  "description": "unityでwebsocketで双方向通信を行う",
+  "description": "",
   "main": "websocket_test_server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/naikasann/unity_socket.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/naikasann/unity_socket/issues"
-  },
-  "homepage": "https://github.com/naikasann/unity_socket#readme",
-  "dependencies": {
-    "ws": "^7.1.2"
-  },
-  "devDependencies": {}
+  "devDependencies": {
+    "ws": "^7.2.0"
+  }
 }

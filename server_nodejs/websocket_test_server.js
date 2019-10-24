@@ -42,3 +42,4 @@ wss.on('connection', (ws) => {
       ws.send("Server received message.");
    });
 });
+console.log("html websocket server running. localhost:3000")
