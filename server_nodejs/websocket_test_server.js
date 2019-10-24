@@ -5,7 +5,8 @@ const fs = require('fs');
 
 var interfaces = os.networkInterfaces();
 
-var address_list = [];
+function take_ipaddress(){
+   var address_list = [];
 
 // craate websocket. WebSocket.Server(<IPAdress> : <Port>)
 // ex :) WebSocket.Server("ws://127.0.0.1:5001")
@@ -19,6 +20,7 @@ for(var k in interfaces){
          address_list.push(address.address);
       }
    }
+   return address_list;
 }
 
 //html reader
@@ -49,12 +51,15 @@ const server = http.createServer((req, res)=>{
    }
  });
 
+
 //websocketserver connection callback
 wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
  
    ws.on('message', (message) => {
-      console.log(`Received a message from client: ${message}`);
+      //recieve msg
+      msg = `${message}`;
+      console.log(msg);
       ws.send(address_list);
    });
  
