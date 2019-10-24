@@ -1,5 +1,8 @@
 const WebSocket  = require('ws');
 var os = require("os");
+const http = require('http');
+const fs = require('fs');
+
 var interfaces = os.networkInterfaces();
 
 function take_ipaddress(){
@@ -17,11 +20,38 @@ function take_ipaddress(){
    return address_list;
 }
 
-var address_list = take_ipaddress();
-// craate websocket. WebSocket.Server(<IPAdress> : <Port>)
-// ex :) WebSocket.Server("ws://127.0.0.1:5001")
+const server = http.createServer((req, res)=>{
+   //ファイル読み込み
+   var url = req.url; //リクエストからURLを取得
+   var tmp = url.split('.'); //splitで . で区切られた配列にする 
+   var ext = tmp[tmp.length - 1]; //tmp配列の最後の要素(外部ファイルの拡張子)を取得
+   var path = '.' + url; //リクエストされたURLをサーバの相対パスへ変換する
+ 
+   switch(ext){
+     case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
+        fs.readFile(path, 'UTF-8', 
+        (err,data)=>{
+          res.writeHead(200,{"Content-Type":"text/javascript"});
+          res.write(data)
+          res.end();
+        });
+        break;
+     case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
+       fs.readFile('index.html','UTF-8',
+       (error, data)=>{
+         res.writeHead(200,{'Content-Type':'text/html'});
+         res.write(data);
+         res.end();
+       })
+       break
+   }
+});
 
+console.log("html server running. localhost:8888")
+server.listen(8888);
+//websocket server 
 const wss = new WebSocket.Server({ port: 3000 });
+var address_list = take_ipaddress();
 
 //websocketserver connection callback
 wss.on('connection', (ws) => {
@@ -41,3 +71,5 @@ wss.on('connection', (ws) => {
       });
    }, 1000);
 });
+
+console.log('Websocket server running. localhost:3000');
