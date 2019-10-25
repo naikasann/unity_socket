@@ -1,6 +1,14 @@
 const WebSocket  = require('ws');
 const http = require('http');
 const fs = require('fs');
+const Crypto = require("crypto");
+
+function getSecureRandom(){
+   const buff = Crypto.randomBytes(8);  // バイナリで8byteのランダムな値を生成
+   const hex  = buff.toString("hex");   // 16進数の文字列に変換
+ 
+   return ( parseInt(hex,16) );         // integerに変換して返却
+ }
 
 //html reader
 const server = http.createServer((req, res)=>{
@@ -39,12 +47,17 @@ const wss = new WebSocket.Server({ port: 3000 });
 wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
    connection_list.push(ws);
-   console.log(connection_list);
+
+   //console.log(connection_list);
 
    ws.on('message', (message) => {
       console.log(`${message}`);
-      ws.send("tanipai");
-      ws[0].send("tanipai");
+      var random_motion = getSecureRandom() % 10;
+
+      //console.log(random_motion);
+      
+      ws.send(random_motion);
+      connection_list[0].send(random_motion);
    });
 });
 console.log("html websocket server running. localhost:3000")
