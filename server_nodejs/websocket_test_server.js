@@ -29,6 +29,8 @@ const server = http.createServer((req, res)=>{
    }
 });
 
+var connection_list = [];
+
 console.log("html server running. localhost:8888")
 server.listen(8888);
 //websocket server 
@@ -36,10 +38,13 @@ const wss = new WebSocket.Server({ port: 3000 });
 //websocketserver connection callback
 wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
- 
+   connection_list.push(ws);
+   console.log(connection_list);
+
    ws.on('message', (message) => {
-      console.log(`Received a message from client: ${message}`);
-      ws.send("Server received message.");
+      console.log(`${message}`);
+      ws.send("tanipai");
+      ws[0].send("tanipai");
    });
 });
 console.log("html websocket server running. localhost:3000")
