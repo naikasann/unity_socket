@@ -6,12 +6,6 @@ using WebSocketSharp.Net;
  
 public class Client : MonoBehaviour
 {
-    public List<int> motion_list = new List<int>();
-    public List<string> ipaddress_list = new List<string>();
-    public int motion_index = 0;
-    public int ipaddress_index = 0;
-
-
     WebSocket ws;
 
     void Start()
@@ -20,9 +14,6 @@ public class Client : MonoBehaviour
  
         ws.OnOpen += (sender, e) =>
         {
-            motion_list.Add(UnityEngine.Random.Range(0, 10));
-            ws.Send(motion_list[motion_index].ToString());
-            motion_index++;
             Debug.Log("ws connected");
         };
         ws.OnMessage += (sender, e) =>
