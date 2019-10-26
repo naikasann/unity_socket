@@ -27,7 +27,7 @@ const server = http.createServer((req, res)=>{
         });
         break;
      case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
-       fs.readFile('index.html','UTF-8',
+       fs.readFile('html/index.html','UTF-8',
        (error, data)=>{
          res.writeHead(200,{'Content-Type':'text/html'});
          res.write(data);
