@@ -16,8 +16,10 @@ ws.addEventListener("message", e => {
     switch(e.data){
         case "2":
             document.getElementById("action_img").src = img[0];
+            break;
         case "4":
             document.getElementById("action_img").src = img[1];
+            break;
     }
 });
 
