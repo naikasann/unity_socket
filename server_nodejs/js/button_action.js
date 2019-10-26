@@ -1,21 +1,26 @@
-const sock = new WebSocket("ws://127.0.0.1:3000");
+const ws = new WebSocket("ws://127.0.0.1:3000");
 
-sock.addEventListener("open", e => {
-    alert("接続が開かれたときに呼び出されるイベント");
+ws.addEventListener("open", e => {
+    alert("websocket connect!");
+    console.log("websocket connect!");
 });
 
-sock.addEventListener("message", e => {
-    alert("サーバーからメッセージを受信したときに呼び出されるイベント");
+ws.addEventListener("message", e => {
+    console.log(e.data);
+    var request_state = document.getElementById("request_state");
+    var action_request = document.getElementById("action_request");
+    request_state.innerHTML = "申請しました！";
+    action_request.innerHTML = e.data + ": ○○をしてください";
 });
 
-sock.addEventListener("close", e => {
-    alert("接続が閉じられたときに呼び出されるイベント");
+ws.addEventListener("close", e => {
+    alert("session close");
 });
 
-sock.addEventListener("error", e => {
-    alert("エラーが発生したときに呼び出されるイベント");
+ws.addEventListener("error", e => {
+    alert("error");
 });
 
 btn.addEventListener("click", e => {
-    sock.send("hello");
+    ws.send("request new member");
 });
