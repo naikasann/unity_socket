@@ -10,22 +10,22 @@ function getSecureRandom(){
    return ( parseInt(hex,16) );
  }
 
- function getType(_url) {
+function getType(_url) {
    var types = {
-     ".html": "text/html",
-     ".css": "text/css",
-     ".js": "text/javascript",
-     ".png": "image/png",
-     ".gif": "image/gif",
-     ".svg": "svg+xml"
+      ".html": "text/html",
+      ".css": "text/css",
+      ".js": "text/javascript",
+      ".png": "image/png",
+      ".gif": "image/gif",
+      ".svg": "svg+xml"
    }
    for (var key in types) {
-     if (_url.endsWith(key)) {
-       return types[key];
-     }
+      if (_url.endsWith(key)) {
+         return types[key];
+      }
    }
    return "text/plain";
- }
+}
 
 //html reader
 const server = http.createServer((req, res)=>{
@@ -34,7 +34,7 @@ const server = http.createServer((req, res)=>{
    var ext = tmp[tmp.length - 1]; //tmp配列の最後の要素(外部ファイルの拡張子)を取得
    var path = '.' + url; //リクエストされたURLをサーバの相対パスへ変換する
    console.log(path)
- 
+
    switch(ext){
       case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
          fs.readFile(path, 'UTF-8', 
