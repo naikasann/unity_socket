@@ -10,23 +10,6 @@ function getSecureRandom(){
    return ( parseInt(hex,16) );
  }
 
-function getType(_url) {
-   var types = {
-      ".html": "text/html",
-      ".css": "text/css",
-      ".js": "text/javascript",
-      ".png": "image/png",
-      ".gif": "image/gif",
-      ".svg": "svg+xml"
-   }
-   for (var key in types) {
-      if (_url.endsWith(key)) {
-         return types[key];
-      }
-   }
-   return "text/plain";
-}
-
 //html reader
 const server = http.createServer((req, res)=>{
    var url = req.url; //リクエストからURLを取得
@@ -48,7 +31,7 @@ const server = http.createServer((req, res)=>{
       case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
          fs.readFile('html/index.html','UTF-8',
          (error, data)=>{
-            res.writeHead(200,{'Content-Type':'text/html'});
+            res.writeHead(200,{"Content-Type":"text/html"});
             res.write(data);
             res.end();
          });
@@ -57,7 +40,7 @@ const server = http.createServer((req, res)=>{
       case 'png':
          fs.readFile(path ,
          (error, data)=>{
-            res.writeHead(200, {"Content-Type": getType(url)});
+            res.writeHead(200, {"Content-Type": "image/png"});
             res.end(data);
          });
          break;
