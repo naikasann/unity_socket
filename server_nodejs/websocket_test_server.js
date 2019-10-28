@@ -19,21 +19,29 @@ const server = http.createServer((req, res)=>{
  
    switch(ext){
      case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
-        fs.readFile(path, 'UTF-8', 
-        (err,data)=>{
-          res.writeHead(200,{"Content-Type":"text/javascript"});
-          res.write(data)
-          res.end();
-        });
-        break;
-     case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
-       fs.readFile('html/index.html','UTF-8',
-       (error, data)=>{
-         res.writeHead(200,{'Content-Type':'text/html'});
-         res.write(data);
-         res.end();
-       })
-       break
+         fs.readFile(path, 'UTF-8', 
+         (err,data)=>{
+            res.writeHead(200,{"Content-Type":"text/javascript"});
+            res.write(data)
+            res.end();
+         });
+      break;
+      case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
+         fs.readFile('/html/index.html','UTF-8',
+         (error, data)=>{
+            res.writeHead(200,{'Content-Type':'text/html'});
+            res.write(data);
+            res.end();
+         })
+      break;
+      case '/resourse/img': //拡張子が/(index.html)だった場合はindex.htmlを返す
+         fs.readFile('/resource/img/animal_kowai_kaba.png',
+         (error, data)=>{
+            res.writeHead(200,{'Content-Type':'image/png'});
+            res.write(data);
+            res.end();
+         })
+      break;
    }
 });
 
