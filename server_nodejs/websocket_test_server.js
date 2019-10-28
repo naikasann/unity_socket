@@ -10,6 +10,23 @@ function getSecureRandom(){
    return ( parseInt(hex,16) );
  }
 
+ function getType(_url) {
+   var types = {
+     ".html": "text/html",
+     ".css": "text/css",
+     ".js": "text/javascript",
+     ".png": "image/png",
+     ".gif": "image/gif",
+     ".svg": "svg+xml"
+   }
+   for (var key in types) {
+     if (_url.endsWith(key)) {
+       return types[key];
+     }
+   }
+   return "text/plain";
+ }
+
 //html reader
 const server = http.createServer((req, res)=>{
    var url = req.url; //リクエストからURLを取得
@@ -18,22 +35,31 @@ const server = http.createServer((req, res)=>{
    var path = '.' + url; //リクエストされたURLをサーバの相対パスへ変換する
  
    switch(ext){
-     case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
-        fs.readFile(path, 'UTF-8', 
-        (err,data)=>{
-          res.writeHead(200,{"Content-Type":"text/javascript"});
-          res.write(data)
-          res.end();
-        });
-        break;
-     case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
-       fs.readFile('html/index.html','UTF-8',
-       (error, data)=>{
-         res.writeHead(200,{'Content-Type':'text/html'});
-         res.write(data);
-         res.end();
-       })
-       break
+      case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
+         fs.readFile(path, 'UTF-8', 
+         (err,data)=>{
+            res.writeHead(200,{"Content-Type":"text/javascript"});
+            res.write(data)
+            res.end();
+         });
+         break;
+      
+      case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
+         fs.readFile('html/index.html','UTF-8',
+         (error, data)=>{
+            res.writeHead(200,{'Content-Type':'text/html'});
+            res.write(data);
+            res.end();
+         });
+         break;
+      
+      case 'png':
+         fs.readFile('resource/img' ,
+         (error, data)=>{
+            res.writeHead(200, {"Content-Type": getType(url)});
+            res.end(data);
+         });
+         break;
    }
 });
 
