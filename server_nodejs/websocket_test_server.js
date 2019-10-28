@@ -33,6 +33,7 @@ const server = http.createServer((req, res)=>{
    var tmp = url.split('.'); //splitで . で区切られた配列にする 
    var ext = tmp[tmp.length - 1]; //tmp配列の最後の要素(外部ファイルの拡張子)を取得
    var path = '.' + url; //リクエストされたURLをサーバの相対パスへ変換する
+   console.log(path)
  
    switch(ext){
       case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
@@ -54,7 +55,7 @@ const server = http.createServer((req, res)=>{
          break;
       
       case 'png':
-         fs.readFile('resource/img' ,
+         fs.readFile(path ,
          (error, data)=>{
             res.writeHead(200, {"Content-Type": getType(url)});
             res.end(data);
