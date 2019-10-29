@@ -71,10 +71,9 @@ wss.on('connection', (ws) => {
          while(motion_list.indexOf(random_motion) >= 0){
             random_motion = getSecureRandom() % 10;
          }
+         motion_list.push(random_motion);
+         ws.send(random_motion);
       }
-
-      motion_list.push(random_motion);
-      ws.send(random_motion);
       //connection_list[0].send(random_motion);
    });
 });
