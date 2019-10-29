@@ -1,7 +1,7 @@
 /*title desigh*/
 .title{
     color: #6cb4e4;
-    text-align: left;
+    text-align: center;
     padding: 0.25em;
     border-top: solid 2px #6cb4e4;
     border-bottom: solid 2px #6cb4e4;
@@ -11,6 +11,7 @@
 
 /*button desigh*/
 .button {
+    text-align : center;
     position: relative;
     display: inline-block;
     font-weight: bold;
@@ -19,18 +20,17 @@
     border-left: solid 4px #668ad8;
     border-right: solid 4px #668ad8;
     color: #668ad8;
-    background: #e1f3ff;
+    text-shadow: 0 0 5px white;
+    background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
     transition: .4s;
 }
-  
-.button :hover {
-    background: #668ad8;
-    color: #FFF;
+
+.button_wrapper{
+    text-align: center;
 }
 
-
 /*footer css desigh*/
-.wrapper{
+.footer_wrapper{
     height: 100%;
     min-height: 100vh;
     position: relative;/*←相対位置*/
@@ -39,6 +39,7 @@
 }
 
 .footer{
+    text-align: center;
     width: 100%;
     padding: 0.5em 1em;
     margin: 2em 0;
