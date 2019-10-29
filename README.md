@@ -56,11 +56,20 @@ nqmはnodejsのパッケージ管理をしているやつ
 
 ``` npm i <packagename> --save ```
 
-で追加をすることができる。npm installより他のデバイスのことを考えるとよい
+で追加をすることができる。
+使用しているnpm packageのインストールは /server_nodejs/npm_packageでコマンド
+
+``` npm install ```
 
 ### 参考URL
 
-1. [UnityでWebSocketを使用する - Qiita](https://qiita.com/oishihiroaki/items/bb2977c72052f5dd5bd9)
-2. [[Unity]Unity で WebSocket ライブラリを用いてリアルタイム通信する | プライムストラクチャーのTECHLOG](https://techblog.primestructure.co.jp/2019/06/28/unity-%E3%81%A7-websocket-%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8B/)
-3. [5分で動かせるwebsocketのサンプル3つ - Qiita](https://qiita.com/okumurakengo/items/a8ccea065f5659d1a1de)
-4. [node.jsのいろいろなモジュール23 – wsでWebSocket接続 ｜ DevelopersIO](https://dev.classmethod.jp/server-side/ws/)
+#### 通信回り(unity, nodejs, js)
+1. [sta/websocket-sharp: A C# implementation of the WebSocket protocol client and server](https://github.com/sta/websocket-sharp)
+2. [UnityでWebSocketを使用する - Qiita](https://qiita.com/oishihiroaki/items/bb2977c72052f5dd5bd9)
+3. [[Unity]Unity で WebSocket ライブラリを用いてリアルタイム通信する | プライムストラクチャーのTECHLOG](https://techblog.primestructure.co.jp/2019/06/28/unity-%E3%81%A7-websocket-%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8B/)
+4. [5分で動かせるwebsocketのサンプル3つ - Qiita](https://qiita.com/okumurakengo/items/a8ccea065f5659d1a1de)
+5. [node.jsのいろいろなモジュール23 – wsでWebSocket接続 ｜ DevelopersIO](https://dev.classmethod.jp/server-side/ws/)
+
+#### web周り(html, css)
+1. [コピペで使えるCSSデザインサンプル集(Web用コード250個以上まとめ)](https://saruwakakun.com/html-css/reference/css-sample#section3)
+2. [CSSでフッターをウィンドウ最下部に固定する方法【初心者向け】 | TechAcademyマガジン](https://techacademy.jp/magazine/19410)
