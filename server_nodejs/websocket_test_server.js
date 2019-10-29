@@ -56,6 +56,7 @@ const wss = new WebSocket.Server({ port: 3000 });
 wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
    connection_list.push(ws);
+   random_motion = getSecureRandom() % 10;
 
    //console.log(connection_list);
 
@@ -68,14 +69,13 @@ wss.on('connection', (ws) => {
       }else{
          // 重複しないモーションの番号を探し、それを格納する。
          while(motion_list.indexOf(random_motion) >= 0){
-            var random_motion = getSecureRandom() % 10;
+            random_motion = getSecureRandom() % 10;
          }
       }
 
       motion_list.push(random_motion);
-      
       ws.send(random_motion);
-      connection_list[0].send(motion_list);
+      //connection_list[0].send(random_motion);
    });
 });
 console.log("html websocket server running. localhost:3000")
