@@ -2,19 +2,42 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>サンプル</title>
+    <title>システムタイトル</title>
     <link rel="stylesheet" type="text/css" href="../css/index.css">
   </head>
   
   <body>
-    <h1>index.htmlを表示</h1>
+    <div class="wrapper">
+      <div class = "title">
+        <h1>システムタイトル</h1>
+      </div>
 
-    <p id = "request_state">申請してみてください！</p>
-    <img src = "" id = "action_img">
-    <p id = "action_request"></p>
+      <p id = "request_state">申請してみてください！</p>
+      <img src = "" id = "action_img">
+      <p id = "action_request"></p>
 
-    <button id = "btn">申請する。</button>
-    <script type="text/javascript" src="../js/button_action.js"></script>
-
+      <div class="button">
+        <a id = "btn">
+          <span>
+            申請する
+          </span>
+        </a>
+      </div>
+      <script type="text/javascript" src="../js/button_action.js"></script>
+      
+      <div class = "footer">
+        <footer>
+          <address>
+              問い合わせ：
+              <a href="https://twitter.com/yamazakisum">製作者Twitter</a>
+          </address>
+          <p>
+            <small>
+              kawalab
+            </small>
+          </p>
+        </footer>
+      </div>
+    </div>
   </body>
 </html>

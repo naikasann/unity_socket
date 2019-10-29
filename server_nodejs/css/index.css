@@ -1,4 +1,54 @@
-h1{
-    color: #6594e0;
-    border-bottom: dashed 2px #6594e0;
+/*title desigh*/
+.title{
+    color: #6cb4e4;
+    text-align: left;
+    padding: 0.25em;
+    border-top: solid 2px #6cb4e4;
+    border-bottom: solid 2px #6cb4e4;
+    background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+    background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+
+/*button desigh*/
+.button {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-left: solid 4px #668ad8;
+    border-right: solid 4px #668ad8;
+    color: #668ad8;
+    background: #e1f3ff;
+    transition: .4s;
+}
+  
+.button :hover {
+    background: #668ad8;
+    color: #FFF;
+}
+
+
+/*footer css desigh*/
+.wrapper{
+    height: 100%;
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 120px;/*←footerの高さ*/
+    box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+.footer{
+    width: 100%;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    border-top: solid 2px #6cb4e4;
+    background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+    background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+}
+.footer p {
+    margin: 0; 
+    padding: 0;
 }
