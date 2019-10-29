@@ -1,14 +1,12 @@
 const WebSocket  = require('ws');
 const http = require('http');
 const fs = require('fs');
-const Crypto = require("crypto");
 
 function getSecureRandom(){
-   const buff = Crypto.randomBytes(8);
-   const hex  = buff.toString("hex");
+   var random_motion = Math.floor( Math.random() * 11 );
  
-   return ( parseInt(hex,16) );
- }
+   return random_motion;
+}
 
 //html reader
 const server = http.createServer((req, res)=>{
@@ -48,6 +46,7 @@ const server = http.createServer((req, res)=>{
 });
 
 var connection_list = [];
+var motion_list = [];
 
 console.log("html server running. localhost:8888")
 server.listen(8888);
@@ -63,6 +62,7 @@ wss.on('connection', (ws) => {
    ws.on('message', (message) => {
       console.log(`${message}`);
       var random_motion = getSecureRandom() % 10;
+      motion_list.push(random_motion);
 
       //console.log(random_motion);
       
