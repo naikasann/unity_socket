@@ -61,13 +61,21 @@ wss.on('connection', (ws) => {
 
    ws.on('message', (message) => {
       console.log(`${message}`);
-      var random_motion = getSecureRandom() % 10;
-      motion_list.push(random_motion);
+      // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
+      if(motion_list.length >= 10){
+         console.log("req max array...");
+         ws.send(-1);
+      }else{
+         // 重複しないモーションの番号を探し、それを格納する。
+         while(motion_list.indexOf(random_motion) >= 0){
+            var random_motion = getSecureRandom() % 10;
+         }
+      }
 
-      //console.log(random_motion);
+      motion_list.push(random_motion);
       
       ws.send(random_motion);
-      connection_list[0].send(random_motion);
+      connection_list[0].send(motion_list);
    });
 });
 console.log("html websocket server running. localhost:3000")
