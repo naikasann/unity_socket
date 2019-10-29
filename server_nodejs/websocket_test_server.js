@@ -17,7 +17,7 @@ const server = http.createServer((req, res)=>{
    console.log(path)
 
    switch(ext){
-      case 'js': //拡張子がjsならContent-Typeをtext/javascriptにする
+      case 'js': 
          fs.readFile(path, 'UTF-8', 
          (err,data)=>{
             res.writeHead(200,{"Content-Type":"text/javascript"});
@@ -25,8 +25,7 @@ const server = http.createServer((req, res)=>{
             res.end();
          });
          break;
-      
-      case '/': //拡張子が/(index.html)だった場合はindex.htmlを返す
+      case '/': 
          fs.readFile('html/index.html','UTF-8',
          (error, data)=>{
             res.writeHead(200,{"Content-Type":"text/html"});
@@ -34,7 +33,14 @@ const server = http.createServer((req, res)=>{
             res.end();
          });
          break;
-      
+      case 'css': 
+         fs.readFile(path,
+         (error, data)=>{
+            res.writeHead(200,{"Content-Type":"text/css"});
+            res.write(data);
+            res.end();
+         });
+         break;
       case 'png':
          fs.readFile(path ,
          (error, data)=>{
