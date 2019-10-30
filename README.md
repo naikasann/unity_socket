@@ -45,7 +45,7 @@ Unity内のasetに入れておくことでwebsocket通信を行うことがで�
 ## 各種開発中環境
 
 * Unity  --- 2019.2.9f(Unity Hub)
-* NodeJS --- v10.16.3
+* NodeJS --- v12.13.0
 
 
 ## nqmのメモ(nodejsのパッケージ管理)
