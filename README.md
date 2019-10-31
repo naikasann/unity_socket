@@ -73,3 +73,8 @@ nqmはnodejsのパッケージ管理をしているやつ
 #### web周り(html, css)
 1. [コピペで使えるCSSデザインサンプル集(Web用コード250個以上まとめ)](https://saruwakakun.com/html-css/reference/css-sample#section3)
 2. [CSSでフッターをウィンドウ最下部に固定する方法【初心者向け】 | TechAcademyマガジン](https://techacademy.jp/magazine/19410)
+
+#### unity kinect周り
+1. [Download Kinect for Windows SDK 2.0 from Official Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=44561)
+2. [Kinect - Windows アプリの開発](https://developer.microsoft.com/ja-jp/windows/kinect)
+3. [UnityでKinectを動かす - Qiita](https://qiita.com/yuzupon/items/4528f7fc09a42fb8af2e)
