@@ -14,7 +14,7 @@ const server = http.createServer((req, res)=>{
    var tmp = url.split('.'); //splitで . で区切られた配列にする 
    var ext = tmp[tmp.length - 1]; //tmp配列の最後の要素(外部ファイルの拡張子)を取得
    var path = '.' + url; //リクエストされたURLをサーバの相対パスへ変換する
-   console.log(path)
+   //console.log(path)
 
    switch(ext){
       case 'js': 
@@ -65,7 +65,6 @@ wss.on('connection', (ws) => {
    console.log('Established a connection with client.');
    connection_list.push(ws);
    random_motion = getSecureRandom() % 10;
-
    //console.log(connection_list);
 
    ws.on('message', (message) => {
@@ -89,7 +88,7 @@ wss.on('connection', (ws) => {
             motion_list.push(random_motion);
             ws.send(random_motion);
             //send unity data...
-            connection_list[0].send(random_motion);
+            connection_list[0].send(String(random_motion));
          }
       }
    });
