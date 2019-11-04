@@ -1,4 +1,3 @@
 .DS_Store
 node_modules
-/resource/music
-/resource/img/jacket
+/resource
