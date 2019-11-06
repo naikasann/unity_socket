@@ -10,7 +10,7 @@ public class Client : MonoBehaviour
 
     void Start()
     {
-        ws = new WebSocket("ws://localhost:3000/");
+        ws = new WebSocket("ws://localhost:443/");
  
         ws.OnOpen += (sender, e) =>
         {
@@ -38,10 +38,13 @@ public class Client : MonoBehaviour
     void Update()
     {
  
-        if (Input.GetKeyUp("s"))
-        {
-            Debug.Log("Pressed [S] key");
-            ws.Send("Client Pressed [S] key");
+        if (Input.GetKeyUp("1")){
+            Debug.Log("1");
+            ws.Send("1");
+        }
+        if(Input.GetKeyUp("2")){
+            Debug.log("2");
+            we.send("2");
         }
  
     }

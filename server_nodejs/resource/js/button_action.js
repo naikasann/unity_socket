@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://127.0.0.1:3000");
+const ws = new WebSocket("ws://127.0.0.1:443");
 
 img = new Array("../resource/img/seikou_banzai_man.png",
                 "../resource/img/businesswoman5_ureshii.png",
@@ -43,5 +43,5 @@ ws.addEventListener("error", e => {
 });
 
 btn.addEventListener("click", e => {
-    ws.send("request new member");
+    ws.send("");
 });

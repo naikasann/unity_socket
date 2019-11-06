@@ -43,6 +43,6 @@ exports.CreateHttpServer = function () {
             break;
       }
    });
-   console.log("http server running. localhost:8888");
-   server.listen(8888);
+   console.log("http server running. localhost:80");
+   server.listen(80);
 }

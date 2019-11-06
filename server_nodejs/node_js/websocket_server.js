@@ -12,7 +12,7 @@ exports.CreateWebsocketServer = function () {
     var unity_send = false;
 
     //websocket server 
-    const wss = new WebSocket.Server({ port: 3000 });
+    const wss = new WebSocket.Server({ port: 443 });
     //websocketserver connection callback
     wss.on('connection', (ws) => {
         console.log('Established a connection with client.');
@@ -22,10 +22,18 @@ exports.CreateWebsocketServer = function () {
 
         ws.on('message', (message) => {
             console.log(`${message}`);
+            var receive = ${message};
             //unityからの送信の場合処理を行わない。
             if(ws == connection_list[0]){
                 //unity側からの処理
                 console.log("unity_process");
+                switch(String(receive)){
+                    //送られてきたモーション番号と一致しているか探し、送信されているコネクションリストと紐づけ。
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                }
             }else{
                 //デバイスからの処理
                 console.log("guest deveice process")
@@ -35,8 +43,9 @@ exports.CreateWebsocketServer = function () {
                     ws.send(-1);
                 }else{
                     // 重複しないモーションの番号を探し、それを格納する。
+                    // [接続番号：モーション番号]
                     while(motion_list.indexOf(random_motion) >= 0){
-                    random_motion = getSecureRandom() % 10;
+                        random_motion = getSecureRandom() % 10;
                     }
                     motion_list.push(random_motion);
                     ws.send(random_motion);
@@ -46,5 +55,5 @@ exports.CreateWebsocketServer = function () {
             }
         });
     });
-    console.log("Websocket_Server localhost:3000")
+    console.log("Websocket_Server localhost:443")
 }
