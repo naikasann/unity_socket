@@ -55,7 +55,7 @@ exports.CreateWebsocketServer = function () {
                     motion_list.push(random_motion);
                     ws.send(random_motion);
                     // send unity data...
-                    connection_list[0].send(String(random_motion));
+                    connection_list[0].send(String(connect_list));
                 }
             }
         });

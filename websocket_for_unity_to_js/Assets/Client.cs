@@ -7,23 +7,33 @@ using WebSocketSharp.Net;
 public class Client : MonoBehaviour
 {
     WebSocket ws;
+    List<string> memberlist = new List<string>();
+    List<string> motionlist = new List<string>();
 
-    void Start()
-    {
+    void Start(){
+        string receive;
+
         ws = new WebSocket("ws://localhost:443/");
  
         ws.OnOpen += (sender, e) =>
         {
             Debug.Log("ws connected");
         };
+
         ws.OnMessage += (sender, e) =>
         {
-            Debug.Log("WebSocket Message Type: " + ", Data: " + e.Data);
-        };
-
-        ws.OnError += (sender, e) =>
-        {
-            Debug.Log("WebSocket Error Message: " + e.Message);
+            receive = e.Data;
+            Debug.Log(receive.Length);
+            for(int i = 0; i < receive.Length; i++){
+                if(i / 2 == 0){
+                    memberlist.Add(receive[i].ToString());
+                    Debug.Log(receive[i].ToString());
+                }else{
+                    motionlist.Add(receive[i].ToString());
+                }
+            }
+            Debug.Log(memberlist);
+            Debug.Log(motionlist);
         };
  
         ws.OnClose += (sender, e) =>
