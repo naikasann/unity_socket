@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using WebSocketSharp;
 using WebSocketSharp.Net;
+using System;
  
 public class Client : MonoBehaviour
 {
     WebSocket ws;
-    List<string> receive_list = new List<string>();
+    string[] member_list;
 
     void Start(){
         string temp_receive;
@@ -24,10 +25,9 @@ public class Client : MonoBehaviour
             temp_receive = e.Data;
             for(int i = 0; i < temp_receive.Length; i++){
                 if(!(i % 2 == 1)){
-                    receive_list.Add(temp_receive[i].ToString());
+                    Debug.Log(temp_receive[i].ToString());
                 }
             }
-            Debug.Log(receive_list);
         };
  
         ws.OnClose += (sender, e) =>
