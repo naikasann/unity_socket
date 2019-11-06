@@ -43,5 +43,5 @@ ws.addEventListener("error", e => {
 });
 
 btn.addEventListener("click", e => {
-    ws.send("");
+    ws.send("request new member");
 });
