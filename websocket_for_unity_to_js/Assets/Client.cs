@@ -7,11 +7,10 @@ using WebSocketSharp.Net;
 public class Client : MonoBehaviour
 {
     WebSocket ws;
-    List<string> memberlist = new List<string>();
-    List<string> motionlist = new List<string>();
+    List<string> receive_list = new List<string>();
 
     void Start(){
-        string receive;
+        string temp_receive;
 
         ws = new WebSocket("ws://localhost:443/");
  
@@ -22,18 +21,13 @@ public class Client : MonoBehaviour
 
         ws.OnMessage += (sender, e) =>
         {
-            receive = e.Data;
-            Debug.Log(receive.Length);
-            for(int i = 0; i < receive.Length; i++){
-                if(i / 2 == 0){
-                    memberlist.Add(receive[i].ToString());
-                    Debug.Log(receive[i].ToString());
-                }else{
-                    motionlist.Add(receive[i].ToString());
+            temp_receive = e.Data;
+            for(int i = 0; i < temp_receive.Length; i++){
+                if(!(i % 2 == 1)){
+                    receive_list.Add(temp_receive[i].ToString());
                 }
             }
-            Debug.Log(memberlist);
-            Debug.Log(motionlist);
+            Debug.Log(receive_list);
         };
  
         ws.OnClose += (sender, e) =>
