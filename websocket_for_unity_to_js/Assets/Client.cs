@@ -37,14 +37,13 @@ public class Client : MonoBehaviour
  
     void Update()
     {
- 
         if (Input.GetKeyUp("1")){
             Debug.Log("1");
             ws.Send("1");
         }
         if(Input.GetKeyUp("2")){
-            Debug.log("2");
-            we.send("2");
+            Debug.Log("2");
+            ws.Send("2");
         }
  
     }
