@@ -7,12 +7,11 @@ using WebSocketSharp.Net;
 public class Client : MonoBehaviour
 {
     WebSocket ws;
-    private List<string> receive_list = new List<string>();
+    string[] receive_list;
     private List<string[]> request_list = new List<string[]>();
 
     void Start(){
         string temp_receive;
-
         ws = new WebSocket("ws://localhost:443/");
  
         ws.OnOpen += (sender, e) =>
@@ -22,22 +21,16 @@ public class Client : MonoBehaviour
 
         ws.OnMessage += (sender, e) =>
         {
+            //データ受信
             temp_receive = e.Data;
-            //リストの初期化
-            receive_list.Clear();
+            //データリセット
             request_list.Clear();
-            //配列をリストにコピー
-            for(int i = 0; i < temp_receive.Length; i++){
-                if(!(i % 2 == 1)){
-                    receive_list.Add(temp_receive[i].ToString());
-                }
+            //request_list <= [[connectionlist_number][motionlist]]
+            receive_list = temp_receive.Split(',');
+            for(int i = 0;i < receive_list.Length;i += 2){
+                string[] buff = {receive_list[i], receive_list[i + 1]};
+                request_list.Add(buff);
             }
-            //Requestlist <= {[member_number][motion_list]}
-            for(int i = 0; i< receive_list.Count; i += 2){
-                string[] tmp = {receive_list[i], receive_list[i+1]};
-                request_list.Add(tmp);
-            }
-            //配列の表示
             showlist_(request_list);
         };
  
@@ -73,16 +66,18 @@ public class Client : MonoBehaviour
     void showlist(IReadOnlyCollection<string> check_list){
         string log = "";
         foreach(string dir in check_list){
-            log += dir.ToString() + ",";
+            log += dir.ToString();
         }
         Debug.Log(log);
     }
     void showlist_(IReadOnlyCollection<string[]> check_list){
         string log = "";
         foreach(string[] dir in check_list){
+            log += "[";
             foreach(string dirr in dir){
                 log += dirr + ",";
             }
+            log += "]";
         }
         Debug.Log(log);
     }
