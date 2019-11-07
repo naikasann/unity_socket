@@ -29,6 +29,9 @@ public class Client : MonoBehaviour
             //配列をリストにコピー
             for(int i = 0; i < temp_receive.Length; i++){
                 if(!(i % 2 == 1)){
+                    ///////////////////////////////////////
+                    //二桁が入力された場合。バグが生じる。
+                    ////////////////////////////////////
                     receive_list.Add(temp_receive[i].ToString());
                 }
             }
