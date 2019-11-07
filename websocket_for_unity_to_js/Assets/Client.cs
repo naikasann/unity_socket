@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using WebSocketSharp;
 using WebSocketSharp.Net;
-using System;
  
 public class Client : MonoBehaviour
 {
     WebSocket ws;
-    string[] member_list;
+    private List<string> receive_list = new List<string>();
 
     void Start(){
         string temp_receive;
@@ -23,11 +22,16 @@ public class Client : MonoBehaviour
         ws.OnMessage += (sender, e) =>
         {
             temp_receive = e.Data;
+            //リストの初期化
+            receive_list.Clear();
+            //配列をリストにコピー
             for(int i = 0; i < temp_receive.Length; i++){
                 if(!(i % 2 == 1)){
-                    Debug.Log(temp_receive[i].ToString());
+                    receive_list.Add(temp_receive[i].ToString());
                 }
             }
+            //配列の表示
+            showlist(receive_list);
         };
  
         ws.OnClose += (sender, e) =>
@@ -39,8 +43,7 @@ public class Client : MonoBehaviour
  
     }
  
-    void Update()
-    {
+    void Update(){
         if (Input.GetKeyUp("1")){
             Debug.Log("1");
             ws.Send("1");
@@ -52,9 +55,17 @@ public class Client : MonoBehaviour
  
     }
  
-    void OnDestroy()
-    {
+    void OnDestroy(){
         ws.Close();
         ws = null;
     }
+
+    void showlist(IReadOnlyCollection<string> entities){
+        string log = "";
+        foreach(string dir in entities){
+            log += dir.ToString() + ",";
+        }
+        Debug.Log(log);
+    }
+    
 }
