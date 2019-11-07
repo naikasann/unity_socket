@@ -51,8 +51,8 @@ exports.CreateWebsocketServer = function () {
                     }
                     // connect_list = [接続番号：モーション番号]
                     connect_list.push([i, random_motion]);
-                    console.log(connect_list);
                     motion_list.push(random_motion);
+                    console.log(connect_list);
                     ws.send(random_motion);
                     // send unity data...
                     connection_list[0].send(String(connect_list));
