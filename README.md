@@ -28,14 +28,16 @@ unityとnode jsののwebsocketを使用して双方向通信を行う。
 nodejsでwebsocketserverとhttpサーバーを構築し、データの処理を行う。
 nodejsをインストールしてある状態で
 
-```/server_nodejs $ node websocket_test_server.js```
+```/server_nodejs $ node main.js```
 
 で実行することができる
+windowsの場合execute.batを動作することでも動作可能。
 
 * /websocket_for_unity_to_js
 
 unityのプロジェクトファイル
 websocket clientのスクリプトが入っている。
+現在キネクトの動作パッケージも追加されている。
 
 * websocket-shape.dll
 
@@ -79,5 +81,5 @@ nqmはnodejsのパッケージ管理をしているやつ
 1. [Download Kinect for Windows SDK 2.0 from Official Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=44561)
 2. [Kinect - Windows アプリの開発](https://developer.microsoft.com/ja-jp/windows/kinect)
 3. [UnityでKinectを動かす - Qiita](https://qiita.com/yuzupon/items/4528f7fc09a42fb8af2e)
-4. [[Cforeach文で配列の要素をすべて表示 | 技術雑記](https://algorithm.joho.info/programming/csharp/array-foreach-cs/)
+4. [[C#]foreach文で配列の要素をすべて表示 | 技術雑記](https://algorithm.joho.info/programming/csharp/array-foreach-cs/)
 5. [引数の型を何でも List にしちゃう奴にそろそろ一言いっておくか - Qiita](https://qiita.com/lobin-z0x50/items/248db6d0629c7abe47dd)

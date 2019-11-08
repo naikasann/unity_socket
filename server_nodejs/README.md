@@ -21,12 +21,18 @@ htmlとwebsocket serverを同時に立て、htmlの閲覧部分とwebsocketで�
 8. ユーザーが次の指示を行う
 9. unityはそれを識別し、対応ページを送信する
 
-このnodejs部分を作成している。
+このNodejs部分を作成している。
 
 ## ファイル構成
 
-* /css --- htmlサーバーで参照するcssファイルを格納するフォルダ (index,)
-* /html --- htmlファイルで参照するhtmlファイルを格納するフォルダ (index,)
-* /js --- htmlファイルで参照するjsファイルを格納するフォルダ（websocket部分）
+* ./execute.bat --- windows用のnodejsを実行バッチ
+* ./main.js --- サーバーを実行するnodejsプログラム
+* /node_js --- nodejsのプログラムを格納しているフォルダ
+  - /http_server.js --- http(html)の通信を行うためのサーバーを構築するためのNodeJsプログラム
+  - /websocket_server.js --- websocket通信を行うためのサーバーを構築するためのNodeJSプログラム
 * /npm_package --- nodejsで使用するパッケージをインストールするためのpackage-jsonが格納されている
 * /resource --- htmlサーバーで使用する画像ファイルなどが格納されているフォルダ
+  - /css --- htmlサーバーで参照するcssファイルを格納するフォルダ (index,) 
+  - /html --- htmlファイルで参照するhtmlファイルを格納するフォルダ (index,)
+  - /js --- htmlファイルで参照するjsファイルを格納するフォルダ（websocket部分,buttonpushしたときのアクション）
+  - /img --- htmlの表示用の画像を保存しておくフォルダ(~~~.png)
