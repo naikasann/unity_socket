@@ -13,35 +13,60 @@ img = new Array("../resource/img/seikou_banzai_man.png",
                 "../resource/img/animal_kowai_kaba.png",);
 
 ws.addEventListener("open", e => {
+    var request_state = document.getElementById("request_state");
     var connect_state = document.getElementById("connect_state");
-    connect_state.innerHTML = "接続できています"
+    request_state.innerHTML = "申請ボタンを押してください！";
+    connect_state.innerHTML = "接続できています";
 });
 
 ws.addEventListener("message", e => {
     var receive = e.data;
-    var request_state = document.getElementById("request_state");
-    var action_request = document.getElementById("action_request");
-    request_state.innerHTML = "申請しました！";
-    switch(e.data){
-        case "-1":
-            document.getElementById("action_img").src = img[10];
-            action_request.innerHTML = "現在認証システムが混み合っています… <br>もう少し時間を空けて再度アクセスしてみてください";
-            break;
-        default:
-            document.getElementById("action_img").src = img[e.data];
-            action_request.innerHTML = receive + ": ○○をしてください";
-            break;
+    var receive_list = receive.split(",");
+
+    //recive action 
+    if(receive_list[0] == "0"){
+        var action = parseInt(receive_list[1]);
+        console.log(action)
+        var request_state = document.getElementById("request_state");
+        var action_request = document.getElementById("action_request");
+        request_state.innerHTML = "申請しました！";
+        switch(action){
+            case -1:
+                document.getElementById("action_img").src = img[10];
+                action_request.innerHTML = "現在認証システムが混み合っています… <br>もう少し時間を空けて再度アクセスしてみてください";
+                break;
+            default:
+                document.getElementById("action_img").src = img[action];
+                action_request.innerHTML = action + ": ○○をしてください";
+                break;
+        }
+    //receive ok
+    }else if(receive_list[1] == "1"){
+
+    //yubisashi
+    }else if(receive_list[0] == "2"){
+
+    }else{
+        var request_state = document.getElementById("request_state");
+        var connect_state = document.getElementById("connect_state");
+        request_state.innerHTML = "よくバグを発生させました。管理者に連絡してください。喜びます。";
+        connect_state.innerHTML = "バグが起きています。";
     }
+
 });
 
-ws.addEventListener("close", e => {
+ws.addEventListener("close", e => { 
+    var request_state = document.getElementById("request_state");   
     var connect_state = document.getElementById("connect_state");
-    connect_state.innerHTML = "接続が切断されました"
+    request_state.innerHTML = "申請ができません。";
+    connect_state.innerHTML = "接続が切断されました";
 });
 
 ws.addEventListener("error", e => {
+    var request_state = document.getElementById("request_state");
     var connect_state = document.getElementById("connect_state");
-    connect_state.innerHTML = "接続エラーです。再接続をお願いします。"
+    request_state.innerHTML = "申請ができません。";
+    connect_state.innerHTML = "接続エラーです。再接続をお願いします。";
 });
 
 btn.addEventListener("click", e => {
