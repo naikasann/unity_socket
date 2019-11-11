@@ -8,7 +8,8 @@ public class Client : MonoBehaviour
 {
     WebSocket ws;
     string[] receive_list;
-    private List<string[]> request_list = new List<string[]>();
+    private List<string> motion_list = new List<string>();
+    private List<string> member_list = new List<string>();
 
     void Start(){
         string temp_receive;
@@ -24,14 +25,16 @@ public class Client : MonoBehaviour
             //データ受信
             temp_receive = e.Data;
             //データリセット
-            request_list.Clear();
+            member_list.Clear();
+            motion_list.Clear();
             //request_list <= [[connectionlist_number][motionlist]]
             receive_list = temp_receive.Split(',');
             for(int i = 0;i < receive_list.Length;i += 2){
-                string[] buff = {receive_list[i], receive_list[i + 1]};
-                request_list.Add(buff);
+                member_list.Add(receive_list[i]);
+                motion_list.Add(receive_list[i + 1]);
             }
-            showlist_(request_list);
+            showlist(motion_list);
+            showlist(member_list);
         };
  
         ws.OnClose += (sender, e) =>
@@ -45,7 +48,15 @@ public class Client : MonoBehaviour
  
     void Update(){
         string get_key = return_get_keyborad();
-        if(get_key != null)    Debug.Log(get_key);
+        int send_msg;
+
+        if(get_key != null){
+            Debug.Log(get_key);
+            if(motion_list.Contains(get_key)){
+                send_msg = check_motionlist_to_memberlist(get_key);
+                ws.Send("1," + send_msg.ToString());
+            }
+        }
     }
  
     void OnDestroy(){
@@ -56,6 +67,16 @@ public class Client : MonoBehaviour
     /******************************************************************************
     *                   debug function
      *****************************************************************************/
+    int check_motionlist_to_memberlist(string seach_number){
+        string buff = seach_number;
+        for(int i = 0; i < motion_list.Count; i++){
+            if(motion_list[i] == buff){
+                return int.Parse(member_list[i]);
+            }
+        }
+
+        return -1;
+    }
     string return_get_keyborad(){
         if (Input.GetKeyUp("0"))   return "0";
         if (Input.GetKeyUp("1"))   return "1";
@@ -73,7 +94,15 @@ public class Client : MonoBehaviour
     void showlist(IReadOnlyCollection<string> check_list){
         string log = "";
         foreach(string dir in check_list){
-            log += dir.ToString();
+            log += dir.ToString() + ",";
+        }
+        Debug.Log(log);
+    }
+
+     void showlist(IReadOnlyCollection<int> check_list){
+        string log = "";
+        foreach(int dir in check_list){
+            log += dir.ToString() + ",";
         }
         Debug.Log(log);
     }
