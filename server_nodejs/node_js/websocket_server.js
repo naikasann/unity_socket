@@ -30,8 +30,27 @@ exports.CreateWebsocketServer = function () {
                 //unity側からの処理
                 console.log("unity_process");
                 //送られてきたモーション番号と一致しているか探し、送信されているコネクションリストと紐づけ。
-            
-            
+                //送らて来たメッセージの状態確認(1 : モーション認証、 2: 指さし動作)
+                // 1の場合　1,コネクションリスト,
+                var state_message = receive.split(",");
+                var next_connect_number;
+                if(state_message[0] == "1"){
+                    for(var i = 0; i < connect_list.length; i++){
+                        if(connect_list[i][0] == state_message[1]){
+                            connect_list.splice(i);
+                            motion_list.splice(i);
+                        }
+                    }
+                    connection_list[0].send(String(connect_list));
+
+
+                    console.log("motion link message... link now!");
+                }else if(state_message[0] == "2"){
+                    console.log("yubisashi motion now! link data now");
+                }else{
+                    console.log("bug? message.... do not process execute!");
+                }
+
             }else{
                 //デバイスからの処理
                 console.log("guest deveice process")
