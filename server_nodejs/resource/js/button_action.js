@@ -13,12 +13,12 @@ img = new Array("../resource/img/seikou_banzai_man.png",
                 "../resource/img/animal_kowai_kaba.png",);
 
 ws.addEventListener("open", e => {
-    alert("websocket connect!");
-    console.log("websocket connect!");
+    var connect_state = document.getElementById("connect_state");
+    connect_state.innerHTML = "接続できています"
 });
 
 ws.addEventListener("message", e => {
-    console.log(e.data);
+    var receive = e.data;
     var request_state = document.getElementById("request_state");
     var action_request = document.getElementById("action_request");
     request_state.innerHTML = "申請しました！";
@@ -29,17 +29,19 @@ ws.addEventListener("message", e => {
             break;
         default:
             document.getElementById("action_img").src = img[e.data];
-            action_request.innerHTML = e.data + ": ○○をしてください";
+            action_request.innerHTML = receive + ": ○○をしてください";
             break;
     }
 });
 
 ws.addEventListener("close", e => {
-    alert("session close");
+    var connect_state = document.getElementById("connect_state");
+    connect_state.innerHTML = "接続が切断されました"
 });
 
 ws.addEventListener("error", e => {
-    alert("error");
+    var connect_state = document.getElementById("connect_state");
+    connect_state.innerHTML = "接続エラーです。再接続をお願いします。"
 });
 
 btn.addEventListener("click", e => {
