@@ -36,7 +36,7 @@ ws.addEventListener("message", e => {
         request_state.innerHTML = "申請しました！";
         switch(action){
             case -1:
-                document.getElementById("action_img").src = img[10];
+                document.getElementById("action_img").src = img[img.length-2];
                 action_request.innerHTML = "現在認証システムが混み合っています… <br>もう少し時間を空けて再度アクセスしてみてください";
                 break;
             default:
@@ -52,7 +52,7 @@ ws.addEventListener("message", e => {
         request_state.innerHTML = "認証が完了しました！";
         action_request.innerHTML = "指さしを行ってみてください。";
         button_state.innerHTML = "reconnect";
-        document.getElementById("action_img").src = img[11];
+        document.getElementById("action_img").src = img[img.length-1];
     //yubisashi
     }else if(receive_list[0] == "2"){
         var button_state = document.getElementById("btn");

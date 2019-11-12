@@ -42,7 +42,7 @@ exports.CreateWebsocketServer = function () {
                         }
                     }
                     connection_list[0].send(String(connect_list));
-                    connection_list[state_message[0]].send("1");
+                    connection_list[state_message[1]].send("1");
 
                     console.log("motion link message... link now!");
                 }else if(state_message[0] == "2"){
