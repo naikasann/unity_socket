@@ -31,6 +31,8 @@ ws.addEventListener("message", e => {
         console.log(action)
         var request_state = document.getElementById("request_state");
         var action_request = document.getElementById("action_request");
+        var button_state = document.getElementById("btn");
+        button_state.innerHTML = "Request";
         request_state.innerHTML = "申請しました！";
         switch(action){
             case -1:
@@ -46,12 +48,15 @@ ws.addEventListener("message", e => {
     }else if(receive_list[0] == "1"){
         var request_state = document.getElementById("request_state");
         var action_request = document.getElementById("action_request");
-        request_state.innerHTML = "接続が完了しました！";
+        var button_state = document.getElementById("btn");
+        request_state.innerHTML = "認証が完了しました！";
         action_request.innerHTML = "指さしを行ってみてください。";
+        button_state.innerHTML = "reconnect";
         document.getElementById("action_img").src = img[11];
     //yubisashi
     }else if(receive_list[0] == "2"){
-
+        var button_state = document.getElementById("btn");
+        button_state.innerHTML = "reconnect";
     }
 });
 
