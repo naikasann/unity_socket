@@ -10,7 +10,8 @@ img = new Array("../resource/img/seikou_banzai_man.png",
                 "../resource/img/kyosyu_smartphone_woman.png",
                 "../resource/img/pose_heart_hand_man.png",
                 "../resource/img/seikou_banzai_man.png",
-                "../resource/img/animal_kowai_kaba.png",);
+                "../resource/img/animal_kowai_kaba.png",
+                "../resource/img/computer_oneclick_sagi.png");
 
 ws.addEventListener("open", e => {
     var request_state = document.getElementById("request_state");
@@ -22,6 +23,7 @@ ws.addEventListener("open", e => {
 ws.addEventListener("message", e => {
     var receive = e.data;
     var receive_list = receive.split(",");
+    console.log(receive);
 
     //recive action 
     if(receive_list[0] == "0"){
@@ -41,18 +43,16 @@ ws.addEventListener("message", e => {
                 break;
         }
     //receive ok
-    }else if(receive_list[1] == "1"){
-
+    }else if(receive_list[0] == "1"){
+        var request_state = document.getElementById("request_state");
+        var action_request = document.getElementById("action_request");
+        request_state.innerHTML = "接続が完了しました！";
+        action_request.innerHTML = "指さしを行ってみてください。";
+        document.getElementById("action_img").src = img[11];
     //yubisashi
     }else if(receive_list[0] == "2"){
 
-    }else{
-        var request_state = document.getElementById("request_state");
-        var connect_state = document.getElementById("connect_state");
-        request_state.innerHTML = "よくバグを発生させました。管理者に連絡してください。喜びます。";
-        connect_state.innerHTML = "バグが起きています。";
     }
-
 });
 
 ws.addEventListener("close", e => { 
