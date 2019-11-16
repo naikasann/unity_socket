@@ -20,6 +20,12 @@ yubisashi_array = new Array("../resource/img/yubisashi/cult_kyoudan.png",
                             "../resource/img/yubisashi/uchidenokoduchi_eto06_hebi"
 );
 
+yubisashi_text = new Array("怪しい宗教団体やカルト教団が、暗い部屋で不気味な儀式を行っているイラストです。https://www.irasutoya.com/2014/07/blog-post_2394.html",
+                           "春の七草の一つ、すずしろのイラストです。現在は大根と呼ばれています。　https://www.irasutoya.com/2014/03/blog-post_3268.html",
+                            "認知症になって街を徘徊をして迷子になっている、おじいさんのイラストです。 https://www.irasutoya.com/2014/01/blog-post_8838.html",
+                            "滑り台と、ジャングルジムと、鉄棒と、砂場がある、公園のイラストです。 https://www.irasutoya.com/2013/05/blog-post_2602.html",
+                            "干支（ヘビ）のキャラクターがしっぽで打ち出の小槌を振っているイラストです。 https://www.irasutoya.com/2019/05/blog-post_8.html");
+
 ws.addEventListener("open", e => {
     var request_state = document.getElementById("request_state");
     var connect_state = document.getElementById("connect_state");
@@ -62,8 +68,13 @@ ws.addEventListener("message", e => {
         document.getElementById("action_img").src = img[img.length-1];
     //yubisashi
     }else if(receive_list[0] == "2"){
+        var target = parseInt(receive_list[1]);
+        var request_state = document.getElementById("request_state");
+        var action_request = document.getElementById("action_request");
         var button_state = document.getElementById("btn");
+        request_state.innerHTML = "指さしを行ってみてください。";
         button_state.innerHTML = "reconnect";
+        action_request.innerHTML = yubisashi_text[target];
     }
 });
 
