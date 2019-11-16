@@ -11,7 +11,6 @@ exports.CreateWebsocketServer = function () {
     var connection_list = [];
     var connect_list = [];
     var motion_list = [];
-    var unity_send = false;
 
     //websocket server 
     const wss = new WebSocket.Server({ port: 443 });
