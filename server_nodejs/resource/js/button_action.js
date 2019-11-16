@@ -1,17 +1,24 @@
 const ws = new WebSocket("ws://127.0.0.1:443");
 
-img = new Array("../resource/img/seikou_banzai_man.png",
-                "../resource/img/businesswoman5_ureshii.png",
-                "../resource/img/byebye_girl.png",
-                "../resource/img/janken_choki.png",
-                "../resource/img/janken_gu.png",
-                "../resource/img/janken_pa.png",
-                "../resource/img/joushi_buka_women3_gekido.png",
-                "../resource/img/kyosyu_smartphone_woman.png",
-                "../resource/img/pose_heart_hand_man.png",
-                "../resource/img/seikou_banzai_man.png",
-                "../resource/img/animal_kowai_kaba.png",
-                "../resource/img/computer_oneclick_sagi.png");
+img = new Array("../resource/img/motion/seikou_banzai_man.png",
+                "../resource/img/motion/businesswoman5_ureshii.png",
+                "../resource/img/motion/byebye_girl.png",
+                "../resource/img/motion/janken_choki.png",
+                "../resource/img/motion/janken_gu.png",
+                "../resource/img/motion/janken_pa.png",
+                "../resource/img/motion/joushi_buka_women3_gekido.png",
+                "../resource/img/motion/kyosyu_smartphone_woman.png",
+                "../resource/img/motion/pose_heart_hand_man.png",
+                "../resource/img/motion/seikou_banzai_man.png",
+                "../resource/img/motion/animal_kowai_kaba.png",
+                "../resource/img/motion/computer_oneclick_sagi.png");
+
+yubisashi_array = new Array("../resource/img/yubisashi/cult_kyoudan.png",
+                            "../resource/img/yubisashi/nanakusa_suzushiro",
+                            "../resource/img/yubisashi/oldman_haikai_man",
+                            "../resource/img/yubisashi/tatemono_kouen",
+                            "../resource/img/yubisashi/uchidenokoduchi_eto06_hebi"
+);
 
 ws.addEventListener("open", e => {
     var request_state = document.getElementById("request_state");
