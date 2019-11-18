@@ -63,10 +63,6 @@ public class Client : MonoBehaviour
         ws.Close();
         ws = null;
     }
-
-    /******************************************************************************
-    *                   debug function
-     *****************************************************************************/
     int check_motionlist_to_memberlist(string seach_number){
         string buff = seach_number;
         for(int i = 0; i < motion_list.Count; i++){
@@ -77,6 +73,10 @@ public class Client : MonoBehaviour
 
         return -1;
     }
+
+    /******************************************************************************
+    *                   debug function
+     *****************************************************************************/
     string return_get_keyborad(){
         if (Input.GetKeyUp("0"))   return "0";
         if (Input.GetKeyUp("1"))   return "1";
@@ -88,6 +88,16 @@ public class Client : MonoBehaviour
         if (Input.GetKeyUp("7"))   return "7";
         if (Input.GetKeyUp("8"))   return "8";
         if (Input.GetKeyUp("9"))   return "9";
+        if (Input.GetKeyUp("a"))   return "a";
+        if (Input.GetKeyUp("b"))   return "b";
+        if (Input.GetKeyUp("c"))   return "c";
+        if (Input.GetKeyUp("d"))   return "d";
+        if (Input.GetKeyUp("e"))   return "e";
+        if (Input.GetKeyUp("f"))   return "f";
+        if (Input.GetKeyUp("g"))   return "g";
+        if (Input.GetKeyUp("h"))   return "h";
+        if (Input.GetKeyUp("i"))   return "i";
+        if (Input.GetKeyUp("j"))   return "j";
         return null;
     }
 
