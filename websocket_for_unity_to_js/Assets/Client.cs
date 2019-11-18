@@ -46,6 +46,7 @@ public class Client : MonoBehaviour
  
     }
  
+    /* debug request statement
     void Update(){
         string get_key = return_get_keyborad();
         int send_msg;
@@ -55,6 +56,25 @@ public class Client : MonoBehaviour
             if(motion_list.Contains(get_key)){
                 send_msg = check_motionlist_to_memberlist(get_key);
                 ws.Send("1," + send_msg.ToString());
+            }
+        }
+    }*/
+
+    void Update(){
+        int send_msg;
+        string[] receive_data;
+        string get_key = return_get_keyborad();
+        
+        if(get_key != null){
+            receive_data = get_key.Split(',');
+            showlist(receive_data);
+            if(receive_data[0] == "1"){
+                if(motion_list.Contains(receive_data[1])){
+                    send_msg = check_motionlist_to_memberlist(receive_data[1]);
+                    ws.Send("1," + send_msg.ToString());
+                }
+            }else if(receive_data[1] == "2"){
+                ws.Send(get_key);
             }
         }
     }
@@ -78,26 +98,26 @@ public class Client : MonoBehaviour
     *                   debug function
      *****************************************************************************/
     string return_get_keyborad(){
-        if (Input.GetKeyUp("0"))   return "0";
-        if (Input.GetKeyUp("1"))   return "1";
-        if (Input.GetKeyUp("2"))   return "2";
-        if (Input.GetKeyUp("3"))   return "3";
-        if (Input.GetKeyUp("4"))   return "4";
-        if (Input.GetKeyUp("5"))   return "5";
-        if (Input.GetKeyUp("6"))   return "6";
-        if (Input.GetKeyUp("7"))   return "7";
-        if (Input.GetKeyUp("8"))   return "8";
-        if (Input.GetKeyUp("9"))   return "9";
-        if (Input.GetKeyUp("a"))   return "a";
-        if (Input.GetKeyUp("b"))   return "b";
-        if (Input.GetKeyUp("c"))   return "c";
-        if (Input.GetKeyUp("d"))   return "d";
-        if (Input.GetKeyUp("e"))   return "e";
-        if (Input.GetKeyUp("f"))   return "f";
-        if (Input.GetKeyUp("g"))   return "g";
-        if (Input.GetKeyUp("h"))   return "h";
-        if (Input.GetKeyUp("i"))   return "i";
-        if (Input.GetKeyUp("j"))   return "j";
+        if (Input.GetKeyUp("0"))   return "1,0";
+        if (Input.GetKeyUp("1"))   return "1,1";
+        if (Input.GetKeyUp("2"))   return "1,2";
+        if (Input.GetKeyUp("3"))   return "1,3";
+        if (Input.GetKeyUp("4"))   return "1,4";
+        if (Input.GetKeyUp("5"))   return "1,5";
+        if (Input.GetKeyUp("6"))   return "1,6";
+        if (Input.GetKeyUp("7"))   return "1,7";
+        if (Input.GetKeyUp("8"))   return "1,8";
+        if (Input.GetKeyUp("9"))   return "1,9";
+        if (Input.GetKeyUp("a"))   return "2,1,0";
+        if (Input.GetKeyUp("b"))   return "2,1,1";
+        if (Input.GetKeyUp("c"))   return "2,1,2";
+        if (Input.GetKeyUp("d"))   return "2,1,3";
+        if (Input.GetKeyUp("e"))   return "2,1,4";
+        if (Input.GetKeyUp("f"))   return "2,1,5";
+        if (Input.GetKeyUp("g"))   return "2,2,0";
+        if (Input.GetKeyUp("h"))   return "2,2,1";
+        if (Input.GetKeyUp("i"))   return "2,2,2";
+        if (Input.GetKeyUp("j"))   return "2,2,3";
         return null;
     }
 
