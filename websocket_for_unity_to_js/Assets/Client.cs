@@ -73,7 +73,7 @@ public class Client : MonoBehaviour
                     send_msg = check_motionlist_to_memberlist(receive_data[1]);
                     ws.Send("1," + send_msg.ToString());
                 }
-            }else if(receive_data[1] == "2"){
+            }else if(receive_data[0] == "2"){
                 ws.Send(get_key);
             }
         }
