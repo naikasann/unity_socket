@@ -45,9 +45,11 @@ exports.CreateWebsocketServer = function () {
 
                     console.log("motion link message... link now!");
                 }else if(state_message[0] == "2"){
+                    send_member = parseInt(state_message[1]);
+                    connection_list[send_member].send("2," + state_message[2]);
                     console.log("yubisashi motion now! link data now");
                 }else{
-                    console.log("bug? message.... do not process execute!");
+                    console.log("bug? message.... not exist process execute!");
                 }
 
             }else{
