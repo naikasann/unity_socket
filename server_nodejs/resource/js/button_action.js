@@ -13,7 +13,7 @@ img = new Array("../resource/img/motion/seikou_banzai_man.png",
                 "../resource/img/motion/animal_kowai_kaba.png",
                 "../resource/img/motion/computer_oneclick_sagi.png");
 
-yubisashi_array = new Array("../resource/img/yubisashi/cult_kyoudan.png",
+yubisashi_img = new Array("../resource/img/yubisashi/cult_kyoudan.png",
                             "../resource/img/yubisashi/nanakusa_suzushiro",
                             "../resource/img/yubisashi/oldman_haikai_man",
                             "../resource/img/yubisashi/tatemono_kouen",
@@ -72,9 +72,10 @@ ws.addEventListener("message", e => {
         var request_state = document.getElementById("request_state");
         var action_request = document.getElementById("action_request");
         var button_state = document.getElementById("btn");
-        request_state.innerHTML = "指さしを行ってみてください。";
+        request_state.innerHTML = "指さしを検知しました！";
         button_state.innerHTML = "reconnect";
         action_request.innerHTML = yubisashi_text[target];
+        document.getElementById("action_img").src = yubisashi_img[target];
     }
 });
 
