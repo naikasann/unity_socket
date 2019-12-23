@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://127.0.0.1:443");
+const ws = new WebSocket("ws://192.168.11.4:443");
 
 img = new Array("../resource/img/motion/seikou_banzai_man.png",
                 "../resource/img/motion/businesswoman5_ureshii.png",
@@ -54,7 +54,7 @@ ws.addEventListener("message", e => {
                 break;
             default:
                 document.getElementById("action_img").src = img[action];
-                action_request.innerHTML = action + ": ○○をしてください";
+                action_request.innerHTML = action + ": ○○をしてください<br>そのモーションをしたまま少しお待ちください！";
                 break;
         }
     //receive ok
