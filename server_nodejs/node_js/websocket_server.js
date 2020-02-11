@@ -1,10 +1,17 @@
 const WebSocket  = require('ws');
-motion_num = 10;
+//motion data count
+motion_num = 6;
+//timeout interval
+timeout_interval = 1000;
 
 function getSecureRandom(){
     var random_motion = Math.floor( Math.random() * (motion_num + 1) );
   
     return random_motion;
+}
+
+function timeout_request(){
+    console.log("Time out.");
 }
 
 exports.CreateWebsocketServer = function () {
@@ -76,6 +83,8 @@ exports.CreateWebsocketServer = function () {
                     ws.send("0," + String(random_motion));
                     // send unity data...
                     connection_list[0].send(String(connect_list));
+                                        
+                    setInterval(timeout_request, timeout_interval)
                 }
             }
         });
