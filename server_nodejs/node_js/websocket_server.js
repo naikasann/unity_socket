@@ -1,7 +1,7 @@
 const WebSocket  = require('ws');
 //motion data count
 motion_num = 6;
-//timeout interval
+//timeout interval(ms)
 timeout_interval = 1000;
 
 function getSecureRandom(){
@@ -10,8 +10,9 @@ function getSecureRandom(){
     return random_motion;
 }
 
-function timeout_request(){
-    console.log("Time out.");
+function timeout_request(ws, request){
+    console.log(request + " number request Time out.");
+    ws.send("time out");
 }
 
 exports.CreateWebsocketServer = function () {
@@ -60,7 +61,7 @@ exports.CreateWebsocketServer = function () {
                 }
 
             }else{
-                //デバイスからの処理
+                // デバイスからの処理
                 console.log("guest deveice process")
                 // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
                 if(motion_list.length >= motion_num){
@@ -84,7 +85,7 @@ exports.CreateWebsocketServer = function () {
                     // send unity data...
                     connection_list[0].send(String(connect_list));
                                         
-                    setInterval(timeout_request, timeout_interval)
+                    setTimeout(timeout_request, timeout_interval, ws, i);
                 }
             }
         });
