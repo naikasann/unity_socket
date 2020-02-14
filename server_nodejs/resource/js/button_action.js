@@ -1,4 +1,15 @@
 const ws = new WebSocket("ws://127.0.0.1:443");
+//timeout interval(ms)
+const timeout_interval = 3000;
+//request stetement for timeout state.
+var timeout_state = false;
+
+function timeout_request(ws, request){
+    console.log("timeout checking");
+    if(timeout_state){
+        ws.send("408");
+    }
+}
 
 img = new Array("../resource/img/motion/seikou_banzai_man.png",
                 "../resource/img/motion/businesswoman5_ureshii.png",
@@ -59,6 +70,9 @@ ws.addEventListener("message", e => {
         }
     //receive ok
     }else if(receive_list[0] == "1"){
+        //timeout setting.
+        timeout_state = false;
+        //html string changing.
         var request_state = document.getElementById("request_state");
         var action_request = document.getElementById("action_request");
         var button_state = document.getElementById("btn");
@@ -95,4 +109,6 @@ ws.addEventListener("error", e => {
 
 btn.addEventListener("click", e => {
     ws.send("request new member");
+    timeout_state = true;
+    setTimeout(timeout_request, timeout_interval);
 });

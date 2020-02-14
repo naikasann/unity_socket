@@ -1,8 +1,6 @@
 const WebSocket  = require('ws');
 //motion data count
-motion_num = 6;
-//timeout interval(ms)
-timeout_interval = 1000;
+const motion_num = 6;
 
 function getSecureRandom(){
     var random_motion = Math.floor( Math.random() * (motion_num + 1) );
@@ -10,16 +8,11 @@ function getSecureRandom(){
     return random_motion;
 }
 
-function timeout_request(ws, request){
-    console.log(request + " number request Time out.");
-    ws.send("time out");
-}
-
-exports.CreateWebsocketServer = function () {
+exports.CreateWebsocketServer = function (){
+    //global variable for timeout requset.
     var connection_list = [];
-    var connect_list = [];
+    var request_list = [];
     var motion_list = [];
-
     //websocket server 
     const wss = new WebSocket.Server({ port: 443 });
     //websocketserver connection callback
@@ -42,13 +35,13 @@ exports.CreateWebsocketServer = function () {
                 var state_message = receive.split(",");
                 var next_connect_number;
                 if(state_message[0] == "1"){
-                    for(var i = 0; i < connect_list.length; i++){
-                        if(connect_list[i][0] == state_message[1]){
-                            connect_list.splice(i);
+                    for(var i = 0; i < request_list.length; i++){
+                        if(request_list[i][0] == state_message[1]){
+                            request_list.splice(i);
                             motion_list.splice(i);
                         }
                     }
-                    connection_list[0].send(String(connect_list));
+                    connection_list[0].send(String(request_list));
                     connection_list[state_message[1]].send("1");
 
                     console.log("motion link message... link now!");
@@ -77,15 +70,13 @@ exports.CreateWebsocketServer = function () {
                             break;
                         }
                     }
-                    // connect_list = [接続番号：モーション番号]
-                    connect_list.push([i, random_motion]);
+                    // request_list = [接続番号：モーション番号]
+                    request_list.push([i, random_motion]);
                     motion_list.push(random_motion);
-                    console.log(connect_list);
+                    console.log(request_list);
                     ws.send("0," + String(random_motion));
                     // send unity data...
-                    connection_list[0].send(String(connect_list));
-                                        
-                    setTimeout(timeout_request, timeout_interval, ws, i);
+                    connection_list[0].send(String(request_list));
                 }
             }
         });
