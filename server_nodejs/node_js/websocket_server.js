@@ -4,7 +4,6 @@ const motion_num = 6;
 
 function getSecureRandom(){
     var random_motion = Math.floor( Math.random() * (motion_num + 1) );
-  
     return random_motion;
 }
 
@@ -55,28 +54,34 @@ exports.CreateWebsocketServer = function (){
 
             }else{
                 // デバイスからの処理
-                console.log("guest deveice process")
-                // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
-                if(motion_list.length >= motion_num){
-                    console.log("req max array...");
-                    ws.send("0,-1");
+                console.log("Data from the guest device.");
+
+                if(receive == "408"){
+                    console.log("Error code of timeout. Do the processing.");
+                    
                 }else{
-                    // 重複しないモーションの番号を探し、それを格納する。
-                    while(motion_list.indexOf(random_motion) >= 0){
-                        random_motion = getSecureRandom() % motion_num;
-                    }
-                    for(var i = 0; i < motion_num; i++){
-                        if(ws == connection_list[i]){
-                            break;
+                    // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
+                    if(motion_list.length >= motion_num){
+                        console.log("req max array...");
+                        ws.send("0,-1");
+                    }else{
+                        // 重複しないモーションの番号を探し、それを格納する。
+                        while(motion_list.indexOf(random_motion) >= 0){
+                            random_motion = getSecureRandom() % motion_num;
                         }
+                        for(var i = 0; i < motion_num; i++){
+                            if(ws == connection_list[i]){
+                                break;
+                            }
+                        }
+                        // request_list = [接続番号：モーション番号]
+                        request_list.push([i, random_motion]);
+                        motion_list.push(random_motion);
+                        console.log(request_list);
+                        ws.send("0," + String(random_motion));
+                        // send unity data...
+                        connection_list[0].send(String(request_list));
                     }
-                    // request_list = [接続番号：モーション番号]
-                    request_list.push([i, random_motion]);
-                    motion_list.push(random_motion);
-                    console.log(request_list);
-                    ws.send("0," + String(random_motion));
-                    // send unity data...
-                    connection_list[0].send(String(request_list));
                 }
             }
         });

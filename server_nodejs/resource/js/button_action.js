@@ -1,17 +1,22 @@
 const ws = new WebSocket("ws://127.0.0.1:443");
 //timeout interval(ms)
-const timeout_interval = 3000;
+const timeout_interval = 5000;
 //request stetement for timeout state.
 var timeout_state = false;
 
-function timeout_request(ws, request){
+function timeout_request(){
     console.log("timeout checking");
     if(timeout_state){
         ws.send("408");
+        var request_state = document.getElementById("request_state");   
+        var connect_state = document.getElementById("connect_state");
+        request_state.innerHTML = "タイムアウトが発生しました。<br>お手数ですが再度申請をお願いします。";
+        connect_state.innerHTML = "認証の際にタイムアウトしました。(サーバーとは接続してます)";
+        document.getElementById("action_img").src = "../resource/img/attention/okotowari_shimasu_man.png";
     }
 }
 
-img = new Array("../resource/img/motion/seikou_banzai_man.png",
+const img = new Array("../resource/img/motion/seikou_banzai_man.png",
                 "../resource/img/motion/businesswoman5_ureshii.png",
                 "../resource/img/motion/byebye_girl.png",
                 "../resource/img/motion/janken_choki.png",
@@ -24,14 +29,14 @@ img = new Array("../resource/img/motion/seikou_banzai_man.png",
                 "../resource/img/motion/animal_kowai_kaba.png",
                 "../resource/img/motion/computer_oneclick_sagi.png");
 
-yubisashi_img = new Array("../resource/img/yubisashi/cult_kyoudan.png",
+const yubisashi_img = new Array("../resource/img/yubisashi/cult_kyoudan.png",
                             "../resource/img/yubisashi/nanakusa_suzushiro",
                             "../resource/img/yubisashi/oldman_haikai_man",
                             "../resource/img/yubisashi/tatemono_kouen",
                             "../resource/img/yubisashi/uchidenokoduchi_eto06_hebi"
 );
 
-yubisashi_text = new Array("怪しい宗教団体やカルト教団が、暗い部屋で不気味な儀式を行っているイラストです。https://www.irasutoya.com/2014/07/blog-post_2394.html",
+const yubisashi_text = new Array("怪しい宗教団体やカルト教団が、暗い部屋で不気味な儀式を行っているイラストです。https://www.irasutoya.com/2014/07/blog-post_2394.html",
                            "春の七草の一つ、すずしろのイラストです。現在は大根と呼ばれています。　https://www.irasutoya.com/2014/03/blog-post_3268.html",
                             "認知症になって街を徘徊をして迷子になっている、おじいさんのイラストです。 https://www.irasutoya.com/2014/01/blog-post_8838.html",
                             "滑り台と、ジャングルジムと、鉄棒と、砂場がある、公園のイラストです。 https://www.irasutoya.com/2013/05/blog-post_2602.html",
