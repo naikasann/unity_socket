@@ -55,10 +55,23 @@ exports.CreateWebsocketServer = function (){
             }else{
                 // デバイスからの処理
                 console.log("Data from the guest device.");
-
-                if(receive == "408"){
+                if(isFinite(receive)){
+                    // who action timeout detection.
                     console.log("Error code of timeout. Do the processing.");
-                    
+                    for(var i = 0; i < request_list.length; i++){
+                        if(String(request_list[i][1]) == receive){
+                            console.log("timeout number :" + String(request_list[i][0]));
+                            var delete_menber = request_list[i][0];
+                            break;
+                        }
+                    }
+                    for(var i = 0; i < request_list.length; i++){
+                        if(String(request_list[i][0]) == delete_menber){
+                            request_list.splice(i);
+                            motion_list.splice(i)
+                            console.log(request_list);
+                        }
+                    }
                 }else{
                     // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
                     if(motion_list.length >= motion_num){

@@ -3,11 +3,16 @@ const ws = new WebSocket("ws://127.0.0.1:443");
 const timeout_interval = 5000;
 //request stetement for timeout state.
 var timeout_state = false;
+//for request timeout detection.
+var request_for_action_list = [];
 
 function timeout_request(){
-    console.log("timeout checking");
+    console.log("timeout checking...");
     if(timeout_state){
-        ws.send("408");
+        timeout_state = false;
+        console.log("timeout request!")
+        ws.send(request_for_action_list[0]);
+        request_for_action_list.splice(0, request_for_action_list.length);
         var request_state = document.getElementById("request_state");   
         var connect_state = document.getElementById("connect_state");
         request_state.innerHTML = "タイムアウトが発生しました。<br>お手数ですが再度申請をお願いします。";
@@ -69,8 +74,10 @@ ws.addEventListener("message", e => {
                 action_request.innerHTML = "現在認証システムが混み合っています… <br>もう少し時間を空けて再度アクセスしてみてください";
                 break;
             default:
+                request_for_action_list.push(action);
                 document.getElementById("action_img").src = img[action];
                 action_request.innerHTML = action + ": ○○をしてください<br>そのモーションをしたまま少しお待ちください！";
+                console.log(request_for_action_list);
                 break;
         }
     //receive ok
@@ -113,7 +120,7 @@ ws.addEventListener("error", e => {
 });
 
 btn.addEventListener("click", e => {
-    ws.send("request new member");
+    ws.send("request new member!");
     timeout_state = true;
     setTimeout(timeout_request, timeout_interval);
 });
