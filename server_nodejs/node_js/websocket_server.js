@@ -72,6 +72,7 @@ exports.CreateWebsocketServer = function (){
                             console.log(request_list);
                         }
                     }
+                    connection_list[0].send(String(request_list));
                 }else{
                     // モーションの数から配列がオーバーした場合。-1を送信してエラー処理を行う。
                     if(motion_list.length >= motion_num){

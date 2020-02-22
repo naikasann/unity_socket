@@ -1,15 +1,16 @@
 const ws = new WebSocket("ws://127.0.0.1:443");
 //timeout interval(ms)
 const timeout_interval = 5000;
-//request stetement for timeout state.
-var timeout_state = false;
 //for request timeout detection.
 var request_for_action_list = [];
 
+var timeout_count = 0;
+
 function timeout_request(){
     console.log("timeout checking...");
-    if(timeout_state){
-        timeout_state = false;
+    timeout_count--;
+    console.log(timeout_count);
+    if(timeout_count == 0){
         console.log("timeout request!")
         ws.send(request_for_action_list[0]);
         request_for_action_list.splice(0, request_for_action_list.length);
@@ -82,8 +83,6 @@ ws.addEventListener("message", e => {
         }
     //receive ok
     }else if(receive_list[0] == "1"){
-        //timeout setting.
-        timeout_state = false;
         //html string changing.
         var request_state = document.getElementById("request_state");
         var action_request = document.getElementById("action_request");
@@ -121,6 +120,6 @@ ws.addEventListener("error", e => {
 
 btn.addEventListener("click", e => {
     ws.send("request new member!");
-    timeout_state = true;
+    timeout_count++;
     setTimeout(timeout_request, timeout_interval);
 });
